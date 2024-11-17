@@ -1,0 +1,75 @@
+<script src="../checkCountry.js"></script>
+<html>
+    <script src="../../header.js"></script>
+    <body>
+        <script>
+            var countryPrefix = localStorage.getItem('urlPrefix');
+            function navigateToProduct(productId) {
+                window.location.href = '/B/' + countryPrefix + '/productDetail.html?productId=' + productId;
+            }
+
+            function viewMorePromotions() {
+                window.location.href = '/B/' + countryPrefix + '/promotionList.html';
+            }
+        </script>
+
+        <script src="menu2.js"></script>
+        <div role="main" class="main">
+            <section class="page-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Promotions</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <h1 style="text-align: center; text-decoration: underline;">All Promotion Items</h1>
+            <div class="container">
+                <!-- Smaller Promotion List -->
+                <div class="row" style="margin-top: 20px;">
+                    <!-- Promotion 1 -->
+                    <div class="col-md-4">
+                        <div class="promotion-item-small">
+                            <img 
+                                src="/img/promotions/F_BM_212014-11-24.jpg" 
+                                alt="Promotion 1" 
+                                style="width: 100%; height: auto; cursor: pointer;"
+                                onclick="navigateToProduct('product1')">
+                            <h5>Promotion Item 1</h5>
+                        </div>
+                    </div>
+
+                    <!-- Promotion 2 -->
+                    <div class="col-md-4">
+                        <div class="promotion-item-small">
+                            <img 
+                                src="/img/promotions/F_CH_73.jpg" 
+                                alt="Promotion 2" 
+                                style="width: 100%; height: auto; cursor: pointer;"
+                                onclick="navigateToProduct('product2')">
+                            <h5>Promotion Item 2</h5>
+                        </div>
+                    </div>
+
+                    <!-- Promotion 3 -->
+                    <div class="col-md-4">
+                        <div class="promotion-item-small">
+                            <img 
+                                src="/img/promotions/F_SC_402014-12-06.jpg" 
+                                alt="Promotion 3" 
+                                style="width: 100%; height: auto; cursor: pointer;"
+                                onclick="navigateToProduct('product3')">
+                            <h5>Promotion Item 3</h5>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+        <script src="../footer.js"></script>
+    </body>
+</html>

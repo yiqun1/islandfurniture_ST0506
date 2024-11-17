@@ -1,0 +1,65 @@
+<script src="../checkCountry.js"></script>
+<html>
+    <script src="../../header.js"></script>
+    <body>
+        <script>
+            var countryPrefix = localStorage.getItem('urlPrefix');
+            function navigateToProduct(productId) {
+                window.location.href = '/B/' + countryPrefix + '/productDetail.html?productId=' + productId;
+            }
+
+            function viewMorePromotions() {
+                window.location.href = '/B/' + countryPrefix + '/promotionList.html';
+            }
+        </script>
+
+        <script src="menu2.js"></script>
+        <div role="main" class="main">
+            <section class="page-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Promotions</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container">
+                <div class="row">
+                    <!-- Promotion 1 -->
+                    <div class="col-md-6">
+                        <div class="promotion-item">
+                            <img 
+                                src="/img/promotions/F_BM_212014-11-24.jpg" 
+                                alt="Promotion 1" 
+                                style="width: 100%; height: auto; cursor: pointer;"
+                                onclick="navigateToFurnitureProductDetai('product1')">
+                            <h4>Exclusive Deal 1</h4>
+                        </div>
+                    </div>
+
+                    <!-- Promotion 2 -->
+                    <div class="col-md-6">
+                        <div class="promotion-item">
+                            <img 
+                                src="/img/promotions/F_CH_73.jpg" 
+                                alt="Promotion 2" 
+                                style="width: 100%; height: auto; cursor: pointer;"
+                                onclick="navigateToProduct('product2')">
+                            <h4>Exclusive Deal 2</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center" style="margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="viewMorePromotions()">View More Promotions</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../footer.js"></script>
+    </body>
+</html>
