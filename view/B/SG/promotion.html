@@ -3,63 +3,70 @@
     <script src="../../header.js"></script>
     <body>
         <script>
-            var countryPrefix = localStorage.getItem('urlPrefix');
-            function navigateToProduct(productId) {
-                window.location.href = '/B/' + countryPrefix + '/productDetail.html?productId=' + productId;
-            }
+            document.addEventListener("DOMContentLoaded", function () {
+                // Fetch promotions from the API
+                fetch(new Request('/api/getAllPromotions', {
+                    method: 'GET',
+                }))
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (promotions) {
+                        var htmlTxt = '';
+                        for (var i = 0; i < promotions.length; i++) {
+                            var promotion = promotions[i];
 
-            function viewMorePromotions() {
-                window.location.href = '/B/' + countryPrefix + '/promotionList.html';
+                            // Generate HTML for each promotion
+                            htmlTxt += `
+                                <div class="col-md-4">
+                                    <div class="promotion-item">
+                                        <img 
+                                            src="${promotion.IMAGEURL}" 
+                                            alt="${promotion.DESCRIPTION}" 
+                                            style="width: 100%; height: auto; cursor: pointer;"
+                                            onclick="redirectToPromotionDetails('${promotion.ID}')">
+                                        <h4>${promotion.DESCRIPTION}</h4>
+                                        <p>Discount: ${promotion.DISCOUNTRATE}%</p>
+                                        <p>Ends on: ${promotion.ENDDATE}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        document.getElementById("promotionDisplay").innerHTML = htmlTxt;
+                    })
+                    .catch(function (error) {
+                        console.error('Error fetching promotions:', error);
+                    });
+            });
+
+            // Redirect to promotion product detail page
+            function redirectToPromotionDetails(promotionId) {
+                var countryPrefix = localStorage.getItem('urlPrefix');
+                window.location.href = '/B/' + countryPrefix + '/promotionProductDetail.html?promotionId=' + promotionId;
             }
         </script>
 
-        <script src="menu2.js"></script>
-        <div role="main" class="main">
-            <section class="page-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>Promotions</h2>
+        <div class="body">
+            <script src="menu2.js"></script>
+            <div class="body">
+                <div role="main" class="main">
+                    <section class="page-top">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Promotions</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="container">
+                        <div class="row" id="promotionDisplay">
+                            <!-- Promotion items will be dynamically injected here -->
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <div class="container">
-                <div class="row">
-                    <!-- Promotion 1 -->
-                    <div class="col-md-6">
-                        <div class="promotion-item">
-                            <img 
-                                src="/img/promotions/F_BM_212014-11-24.jpg" 
-                                alt="Promotion 1" 
-                                style="width: 100%; height: auto; cursor: pointer;"
-                                onclick="navigateToFurnitureProductDetai('product1')">
-                            <h4>Exclusive Deal 1</h4>
-                        </div>
-                    </div>
-
-                    <!-- Promotion 2 -->
-                    <div class="col-md-6">
-                        <div class="promotion-item">
-                            <img 
-                                src="/img/promotions/F_CH_73.jpg" 
-                                alt="Promotion 2" 
-                                style="width: 100%; height: auto; cursor: pointer;"
-                                onclick="navigateToProduct('product2')">
-                            <h4>Exclusive Deal 2</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 text-center" style="margin-top: 20px;">
-                        <button class="btn btn-primary" onclick="viewMorePromotions()">View More Promotions</button>
-                    </div>
-                </div>
+                <script src="../footer.js"></script>
             </div>
         </div>
-
-        <script src="../footer.js"></script>
     </body>
 </html>
